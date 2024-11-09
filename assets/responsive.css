@@ -93,4 +93,7 @@
   .welcome-area .header-text .inner-title.inner-responsive {
     width: 350px;
   }
+  .row.inner-section-one:first-child {
+    margin-top: 85px;
+  }
 }
