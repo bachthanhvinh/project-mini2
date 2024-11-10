@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project-mini-2</title>
+    <!-- anime.js -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
     <!-- Animate.css -->
 
     <link rel="stylesheet" href="https://wowjs.uk/css/libs/animate.css" />
@@ -471,25 +474,33 @@
             <div class="row">
               <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="box-paramenter decoration-bottom">
-                  <div class="inner-paramenter">126</div>
+                  <div class="inner-paramenter counter" data-number="126">
+                    0
+                  </div>
                   <div class="inner-title">Projects</div>
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="box-paramenter decoration-top">
-                  <div class="inner-paramenter">63</div>
+                  <div class="inner-paramenter counter" data-number="63">
+                    63
+                  </div>
                   <div class="inner-title">Happy Clients</div>
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="box-paramenter decoration-bottom">
-                  <div class="inner-paramenter">18</div>
+                  <div class="inner-paramenter counter" data-number="18">
+                    18
+                  </div>
                   <div class="inner-title">Awards Wins</div>
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="box-paramenter">
-                  <div class="inner-paramenter">27</div>
+                  <div class="inner-paramenter counter" data-number="27">
+                    27
+                  </div>
                   <div class="inner-title">Countries</div>
                 </div>
               </div>
@@ -679,6 +690,42 @@
     <script>
       new WOW().init();
     </script>
-    <!-- countup.js -->
+    <!-- anime.js -->
+    <script>
+      // Hàm bắt đầu hiệu ứng nhảy số
+      function startCounter(element) {
+        const targetValue = parseInt(element.getAttribute("data-number")); // Lấy giá trị từ thuộc tính data-number
+        anime({
+          targets: element, // Chọn phần tử hiện tại
+          innerHTML: [0, targetValue], // Giá trị bắt đầu là 0 và giá trị kết thúc là giá trị trong data-number
+          round: 1, // Làm tròn kết quả
+          duration: 3000, // Thời gian hiệu ứng là 3 giây
+          easing: "easeOutQuad", // Loại easing cho hiệu ứng
+        });
+      }
+
+      // Thiết lập Intersection Observer
+      document.addEventListener("DOMContentLoaded", function () {
+        const counterElements = document.querySelectorAll(".counter"); // Lấy tất cả các phần tử có lớp .counter
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                startCounter(entry.target); // Bắt đầu hiệu ứng nhảy số khi phần tử vào vùng nhìn thấy
+                observer.unobserve(entry.target); // Ngừng quan sát sau khi đã bắt đầu
+              }
+            });
+          },
+          {
+            threshold: 0.5, // Kích hoạt khi 50% phần tử đã vào khung nhìn
+          }
+        );
+
+        // Bắt đầu quan sát tất cả các phần tử .counter
+        counterElements.forEach((counterElement) => {
+          observer.observe(counterElement);
+        });
+      });
+    </script>
   </body>
 </html>
