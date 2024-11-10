@@ -423,6 +423,12 @@ li {
   background-color: var(--color-two-purple);
   transition: 0.3s;
 }
+.section-five .box-body .body-price.color-pink {
+  background-color: var(--color-three-pink);
+}
+.section-five .box-body .body-price.color-pink:hover {
+  background-color: var(--color-two-purple);
+}
 .section-five .box-body .body-price:hover {
   background-color: var(--color-three-pink);
 }
